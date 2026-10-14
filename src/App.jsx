@@ -1,122 +1,42 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { shopData, casesList } from './data';
+import { Header } from './components/Header';
+import { Hero } from './components/Hero';
+import { ProductList } from './components/ProductList';
+import { Reviews } from './components/Reviews';
+import { Footer } from './components/Footer';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+// Главный компонент приложения (строго стрелочная функция)
+const App = () => {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="home-page">
+      {/* 1. Header: передаем название организации */}
+      <Header orgName={shopData.orgName} />
 
-      <div className="ticks"></div>
+      <main>
+        {/* 2. Hero: передаем название организации, заголовок и описание */}
+        <Hero 
+          orgName={shopData.orgName} 
+          title={shopData.mainTitle} 
+          subtitle={shopData.subtitle} 
+        />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* 3. ProductList: передаем заголовок и массив объектов */}
+        <ProductList 
+          title="Чехлы для iPhone 15 Pro" 
+          items={casesList} 
+        />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
+        {/* 4. Reviews: отзывы покупателей */}
+        <Reviews />
+      </main>
 
-export default App
+      {/* 5. Footer: передаем название организации и город */}
+      <Footer 
+        orgName={shopData.orgName} 
+        location={shopData.location} 
+      />
+    </div>
+  );
+};
+
+export default App;
